@@ -60,12 +60,12 @@ hashcat -m 5600 ntlmhash.txt rockyou.txt --force
 ![crackpass](https://github.com/ab3lsec/ADAttackDefenseProject/assets/87868050/33f777ce-ba33-4665-b9ff-a7854dbfda62)
 
 
-### LLMNR POISONING DEFENSE TECHNIQUES
+## LLMNR POISONING DEFENSE TECHNIQUES
 
 Now through these lab we understood that turning ON LLMNR feature is a bad security practise. 
 So here are some defences to prevent LLMNR poisoning attack:
 
-##### 1. DISABLE LLMNR FEATURE
+##### 1. DISABLE LLMNR FEATURES
 To disable it navigate to "Group Policy Editor" and follow the path 
 
 ```
