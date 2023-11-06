@@ -4,7 +4,7 @@ Utilizing online resources and guided tutorials, especially one from TheCyberMen
 
 In this document, I outline all the steps I followed to build the Active Directory lab environment.
 
-##### LAB REQUIREMENTS:
+### LAB REQUIREMENTS:
 
 For Building this lab, I have used the following software and Operating systems.
 - VMWare Workstation 17 player
@@ -15,7 +15,7 @@ For Building this lab, I have used the following software and Operating systems.
 
 For System Requirements, the ideal amount of RAM is 16 GB. So that you can allocate enough RAM for each Operating System. I have used 4 GB for my Kali box and 2GB each for all Windows machines on the domain. 
 
-##### INSTALLING WINDOWS SERVER 2019 (DOMAIN CONTROLLER)
+### INSTALLING WINDOWS SERVER 2019 (DOMAIN CONTROLLER)
 
 1. Select "Create a new Virtual Machine"
 2. Now Select the Windows server 2019 ISO image that we downloaded.
@@ -29,7 +29,7 @@ For System Requirements, the ideal amount of RAM is 16 GB. So that you can alloc
 10. Select Custom Install > Select Unallocated Space > New > Apply > Next
 11. Set the Password for Administrator: `P@$$w0rd!` > Finish
 
-##### CREATING A DOMAIN & A DOMAIN CONTROLLER:
+### CREATING A DOMAIN & A DOMAIN CONTROLLER:
 
 Here we will create a new domain named `HERO.local` and promote the Windows Server 2019 machine as the Domain Controller for `HERO.local`
  
@@ -40,7 +40,7 @@ Here we will create a new domain named `HERO.local` and promote the Windows Serv
 6. Select "Add a new forest" > Give Root domain name: `HERO.local` > Next
 7. Set DSRM Password (Use the Same Password: `P@$$w0rd!`)  > Next for all > Install
 
-##### INSTALLING WINDOWS 10 ENTERPRISE (USER MACHINES)
+### INSTALLING WINDOWS 10 ENTERPRISE (USER MACHINES)
 
 1. Select "Create a new Virtual Machine"
 2. Now Select the Windows server 2019 ISO image that we downloaded.
@@ -56,7 +56,7 @@ Here we will create a new domain named `HERO.local` and promote the Windows Serv
 12. Search > View Your PC Name > Rename this PC `BATMAN` and Restart
 13. Do the same for the Second User Machine `FLASH` and Give Username: `Barry Allen` and Password: `Password2`
 
-##### SETTING UP AD USERS, GROUPS AND POLICIES
+### SETTING UP AD USERS, GROUPS AND POLICIES
 
 After creating a domain `HERO.local` and a domain controller `JUSTICE-DC` , we need to create new users for the User machines that we set Up. For this project we will create 4 new Accounts:
 - A New Domain Admin Account: `Clark Kent` (superman@HERO.local)
@@ -75,7 +75,7 @@ After creating a domain `HERO.local` and a domain controller `JUSTICE-DC` , we n
 10. We also need to create a domain admin account. For this, Right Click on  `Administrator` > Copy > Set Full Name: `Clark Kent` >Set User logon name: `superman` > Set Password: `Password2023@!` > Select "Password Never Expires" > Next > Finish
 11. We also need to create a Service Account as a domain admin. For this, Right Click on  `Administrator` > Copy > Set Full Name: `SQL Service` >Set User logon name: `SQLService` > Set Password: `MYpassword123!` > Select "Password Never Expires" > Next > Finish
 
-##### CREATING A FILE SHARE:
+### CREATING A FILE SHARE:
 
 We need to create a file share, which will open ports 445 and 139. These ports can be very dangerous which is demonstrated in the upcoming attacks.
 
@@ -83,7 +83,7 @@ We need to create a file share, which will open ports 445 and 139. These ports c
 2. TASKS > New Share > SMB Share - Quick > Next
 3. Share name: `hackme` > Proceed with Defaults > Create
 
-##### CREATING SPN FOR THE SERVICE ACCOUNT:
+### CREATING SPN FOR THE SERVICE ACCOUNT:
 
 Service Principal Name (SPN) are used for Service Accounts which becomes very useful in attacks like "Kerberoasting". Therefore we need to set the SPN for the `SQLService` account that we created.
 
@@ -97,7 +97,7 @@ setspn -a JUSTICE-DC/SQLService.HERO.local:60111 HERO\SQLService
 setspn -T HERO.local -Q */*
 ```
 
-##### DISABLING WINDOWS DEFENDER:
+### DISABLING WINDOWS DEFENDER:
 
 1. Search > Group Policy Management > Run as administrator
 2. Expand Forest > Expand Domains > Right Click on `HERO.local` > Create a GPO > Name: `Disable Windows Defender` > OK
@@ -105,7 +105,7 @@ setspn -T HERO.local -Q */*
 4. Expand Forest > Expand Domains > Select `HERO.local` > Right Click `Disable Windows Defender` > Edit
 5. Computer Configuration > Policies > Administrative Template > Windows Components > Select Windows Defender Antivirus > Double click 'Turn off Windows Defender Antivirus' > Select "Enabled" > OK
 
-##### CONNECTING ALL MACHINES TO THE DOMAIN:
+### CONNECTING ALL MACHINES TO THE DOMAIN:
 
 At this stage, all our machines are set up, all we need to do is add them to the domain and connect them all together.
 The things we need to do are:
