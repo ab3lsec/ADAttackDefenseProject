@@ -1,0 +1,18 @@
+# SMB Relay Defence and Mitigation Strategies
+
+Through the previous lab it sure SMB Relay is a very Dangerous attack which can expose credentials and also we have seen gaining an interactive shell and running commands on the target.<br>
+To mitigate or prevent SMB Relay we can follow few steps:
+
+### 1. ENABLE SMB SIGNING
+As we seen in the beginning SMB Relay attack requires the target to have SMB signing feature disabled. If we Enable this feature on all user machines then it completely Stops the ATTACK.<br>
+But one problem with it is, there can be performance issues like slower file transfers etc.. if SMB signing is enabled.
+
+### 2. DISABLE NTLM AUTHENTICATION
+In Windows, Kerberos can be used as an alternative to normal NTLM Authentication.  In this case, there is no possibility of relaying NTLM hashes which completely stops the attack.
+
+### 3. IMPLEMENT ACCOUNT TIERING
+By tiering accounts, organizations can implement the principle of least privilege, which ensures that users have only the minimum level of access required to perform their tasks. In this case, administrators can only access their privileged accounts.
+
+### 4. LOCAL ADMIN RESTRICTION
+Another important requirement for SMB Relay attack is that user has to be local admin on target. So if `Bruce Wayne` was never a local admin on `FLASH`. Then this whole attack could have been prevented.<br>
+Therefore if we restrict Local admins then it completely stops the attack.
